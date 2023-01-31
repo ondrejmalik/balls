@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>13.4</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <Import Project="..\osu.Framework.iOS.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\osu.Framework.iOS\osu.Framework.iOS.csproj" />
+    <ProjectReference Include="..\osu.Framework\osu.Framework.csproj" />
+    <ProjectReference Include="..\SampleGame\SampleGame.csproj" />
+  </ItemGroup>
+</Project>
