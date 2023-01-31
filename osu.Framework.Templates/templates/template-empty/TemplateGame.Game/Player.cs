@@ -17,7 +17,7 @@ namespace TemplateGame.Game
             AutoSizeAxes = Axes.Both;
             Origin = Anchor.Centre;
             Anchor = Anchor.Centre;
-            Position = new Vector2(3 * 150, 4 * 150);
+            Position = new Vector2(3 * 150, 3 * 150);
         }
 
         [BackgroundDependencyLoader]
@@ -31,7 +31,7 @@ namespace TemplateGame.Game
                 },
                 Koul2 = new Koule
                 {
-                    Position = Koul1.Center,
+                    Position = new Vector2(0, 0),
                 }
             };
             Koul1.Sprite.Texture = textures.Get("red");

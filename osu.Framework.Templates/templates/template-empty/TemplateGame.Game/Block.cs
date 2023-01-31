@@ -22,6 +22,7 @@ namespace TemplateGame.Game
         private Container box;
         public Box Hitbox;
         public _Direction Direction;
+        public Type Type;
 
         public Block()
         {

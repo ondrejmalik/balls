@@ -36,7 +36,7 @@ namespace TemplateGame.Game
                 },
                 camera = new Camera
                 {
-                    Position = new Vector2(0, 0)
+                    Position = new Vector2(-960, 0)
                 },
                 text = new SpriteText
                 {

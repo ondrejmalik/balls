@@ -20,7 +20,7 @@ namespace TemplateGame.Game
 
         public Camera()
         {
-            Anchor = Anchor.TopLeft;
+            Anchor = Anchor.TopCentre;
             Origin = Anchor.TopLeft;
             AutoSizeAxes = Axes.Both;
         }
@@ -28,7 +28,7 @@ namespace TemplateGame.Game
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-            
+
             i = 0;
             InternalChild = Box = new Container
             {
@@ -75,7 +75,7 @@ namespace TemplateGame.Game
             }
             else { lastObject = true; }
         }
-        
+
 
         protected override bool OnKeyDown(KeyDownEvent e)
         {
@@ -135,7 +135,7 @@ namespace TemplateGame.Game
                             this.MoveTo(new Vector2(this.Position.X - Map.GridSize, this.Position.Y), Map.GridSize);
                             break;
                     }
-                    
+
                     if (lastObject == false) { i++; }
                 }
             }

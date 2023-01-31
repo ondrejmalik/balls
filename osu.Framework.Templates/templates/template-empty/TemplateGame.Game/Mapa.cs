@@ -11,7 +11,8 @@ namespace TemplateGame.Game
         public Container Box;
         public Block[] Objects = new Block[100];
         public int GridSize = 150;
-        private string map = "rrrrrrrrrrrrrrrrrrrrrrrru";
+        private string map = "rnrnrnrnrndudndndnldlnlnur";
+        private Block b;
 
         public Mapa()
         {
@@ -41,40 +42,66 @@ namespace TemplateGame.Game
             });
             char[] directions = map.ToCharArray();
 
-            for (int i = 1; i < map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
-                switch (directions[i])
+                if (i % 2 == 0)
                 {
-                    case 'r':
-                        x++;
-                        addBox(i, x, y, _Direction.Right);
-                        break;
+                    b = new Block();
 
-                    case 'l':
-                        x--;
-                        addBox(i, x, y, _Direction.Left);
-                        break;
+                    switch (directions[i])
+                    {
+                        case 'r':
+                            x++;
+                            b.Direction = _Direction.Right;
+                            break;
 
-                    case 'u':
-                        y--;
-                        addBox(i, x, y, _Direction.Up);
-                        break;
+                        case 'l':
+                            x--;
+                            b.Direction = _Direction.Left;
+                            break;
 
-                    case 'd':
-                        y++;
-                        addBox(i, x, y, _Direction.Down);
-                        break;
+                        case 'u':
+                            y--;
+                            b.Direction = _Direction.Up;
+                            break;
+
+                        case 'd':
+                            y++;
+                            b.Direction = _Direction.Down;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (directions[i])
+                    {
+                        case 'u':
+                            b.Type = new Type(_Change.Speed);
+                            break;
+
+                        case 'd':
+                            b.Type = new Type(_Change.Slow);
+                            break;
+
+                        case 'r':
+                            b.Type = new Type(_Change.Reverse);
+                            break;
+
+                        case 'n':
+                            b.Type = new Type(_Change.Normal);
+                            break;
+                    }
+
+                    addBox(i / 2, x, y, b);
                 }
             }
         }
 
-        private void addBox(int i, int x, int y, _Direction direction)
+        private void addBox(int i, int x, int y, Block b)
         {
-            Box.Add(Objects[i] = new Block
-            {
-                Position = new Vector2(x * GridSize, y * GridSize),
-                Direction = direction,
-            });
+            b.X = x * GridSize;
+            b.Y = y * GridSize;
+            Box.Add(Objects[i] = b);
         }
 
         protected override void LoadComplete()
@@ -85,13 +112,16 @@ namespace TemplateGame.Game
         protected override void Update()
         {
         }
+
         public int LastObject()
         {
             int i = 0;
+
             foreach (Block b in Objects)
             {
                 if (b != null) i++; /////////////////////////////////////////////mejrä poradil :D
             }
+
             return i;
         }
     }
