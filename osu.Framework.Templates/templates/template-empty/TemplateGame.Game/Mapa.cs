@@ -13,6 +13,7 @@ namespace TemplateGame.Game
         public int GridSize = 150;
         private string map = "rnrnrnrnrndudndndnldlnlnur";
         private Block b;
+        private MapLoader mapLoader = new MapLoader();
 
         public Mapa()
         {
@@ -33,6 +34,7 @@ namespace TemplateGame.Game
                 {
                 }
             };
+            map = mapLoader.LoadMap();
             int x = 4;
             int y = 3;
             Box.Add(Objects[0] = new Block
