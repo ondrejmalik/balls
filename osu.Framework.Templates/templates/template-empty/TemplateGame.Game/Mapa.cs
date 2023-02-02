@@ -1,4 +1,6 @@
-﻿using osu.Framework.Allocation;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Textures;
@@ -14,6 +16,7 @@ namespace TemplateGame.Game
         private string map = "rnrnrnrnrndudndndnldlnlnur";
         private Block b;
         private MapLoader mapLoader = new MapLoader();
+        private List<JToken> actions = new List<JToken>();
 
         public Mapa()
         {
@@ -35,6 +38,7 @@ namespace TemplateGame.Game
                 }
             };
             map = mapLoader.LoadMap();
+            actions = mapLoader.LoadActions();
             int x = 4;
             int y = 3;
             Box.Add(Objects[0] = new Block
@@ -96,6 +100,15 @@ namespace TemplateGame.Game
 
                     addBox(i / 2, x, y, b);
                 }
+            }
+
+            foreach (var action in actions)
+            {
+                int i = (int)action["floor"];
+                string eventType = (string)action["eventType"];
+                string speedType = (string)action["speedType"];
+                string bpm = (string)action["beatsPerMinute"];
+                string bpmMultiplier = (string)action["bpmMultiplier"];
             }
         }
 
