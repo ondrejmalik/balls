@@ -8,13 +8,14 @@ public enum _Change
     Normal,
     Speed,
     Slow,
-    Reverse,
+    Twirl,
 }
 
 public class Type
 {
     public _Change Change;
     public float Ratio = 1;
+    public float Bpm = 0;
 
     public Type(_Change change, float ratio)
     {

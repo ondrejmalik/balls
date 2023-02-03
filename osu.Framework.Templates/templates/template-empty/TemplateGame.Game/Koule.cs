@@ -12,7 +12,8 @@ namespace TemplateGame.Game
     {
         private Container box;
         private SpriteText text;
-        private float speed = 2.0f;
+        public float Speed = 60;
+        public float Multiplier = 1;
         private float radius = 150.0f;
         public bool CanMove = false;
         public Vector2 Center;
@@ -63,7 +64,7 @@ namespace TemplateGame.Game
             if (CanMove)
             {
                 base.Update();
-                Angle += speed * ((float)Time.Elapsed) / 500;
+                Angle += Multiplier * Speed * ((float)Time.Elapsed) * MathF.PI / 1000 / 60;
                 var x = MathF.Cos(Angle) * radius;
                 var y = MathF.Sin(Angle) * radius;
                 Position = new Vector2(x, y);

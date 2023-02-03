@@ -28,7 +28,6 @@ namespace TemplateGame.Game
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
-
             i = 0;
             InternalChild = Box = new Container
             {
@@ -59,6 +58,7 @@ namespace TemplateGame.Game
         protected override void Update()
         {
             base.Update();
+
             if (i != lastObjectIndex)
             {
                 if (Map.Objects[i].CheckCollision(player.CollisionQuad))
@@ -71,11 +71,9 @@ namespace TemplateGame.Game
                     collision = false;
                     //text.Text = "NeKolize :(";
                 }
-
             }
             else { lastObject = true; }
         }
-
 
         protected override bool OnKeyDown(KeyDownEvent e)
         {
@@ -86,10 +84,16 @@ namespace TemplateGame.Game
                 if (player.Koul1.CanMove && collision)
                 {
                     player.Koul1.CanMove = false;
-                    //CameraPos = new Vector2(Box.Position.X, Box.Position.Y);
                     player.Koul2.Change(player.Koul1.Angle);
                     player.Koul1.Position = new Vector2(0, 0);
                     player.Position = Center;
+                    if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+                    {
+                        player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                        player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                        player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                        player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                    }
                     player.Koul2.CanMove = true;
                     already_Switched = true;
                 }
@@ -97,22 +101,20 @@ namespace TemplateGame.Game
                 if (player.Koul2.CanMove && already_Switched == false && collision)
                 {
                     player.Koul2.CanMove = false;
-                    //CameraPos = new Vector2(Box.Position.X, Box.Position.Y);
                     player.Koul1.Change(player.Koul2.Angle);
                     player.Koul2.Position = new Vector2(0, 0);
                     player.Position = Center;
+
+                    if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+                    {
+                        player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                        player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                        player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                        player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                    }
+
                     player.Koul1.CanMove = true;
                     already_Switched = true;
-                    /*
-                     stary code ktery nefunguje s delay
-                     player.Koul2.canMove = false;
-                     this.box.MoveTo(new Vector2(this.box.Position.X, this.box.Position.Y - 150));
-                     player.Koul1.Change(player.Koul2._angle);
-                     player.Koul2.Position = Center;
-                     player.Koul1.center = Center;
-                     i++;
-                     player.Koul1.canMove = true;
-                    */
                 }
 
                 if (already_Switched)

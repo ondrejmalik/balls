@@ -50,56 +50,32 @@ namespace TemplateGame.Game
 
             for (int i = 0; i < map.Length; i++)
             {
-                if (i % 2 == 0)
+                b = new Block();
+
+                switch (directions[i])
                 {
-                    b = new Block();
+                    case 'R':
+                        x++;
+                        b.Direction = _Direction.Right;
+                        break;
 
-                    switch (directions[i])
-                    {
-                        case 'r':
-                            x++;
-                            b.Direction = _Direction.Right;
-                            break;
+                    case 'L':
+                        x--;
+                        b.Direction = _Direction.Left;
+                        break;
 
-                        case 'l':
-                            x--;
-                            b.Direction = _Direction.Left;
-                            break;
+                    case 'U':
+                        y--;
+                        b.Direction = _Direction.Up;
+                        break;
 
-                        case 'u':
-                            y--;
-                            b.Direction = _Direction.Up;
-                            break;
-
-                        case 'd':
-                            y++;
-                            b.Direction = _Direction.Down;
-                            break;
-                    }
+                    case 'D':
+                        y++;
+                        b.Direction = _Direction.Down;
+                        break;
                 }
-                else
-                {
-                    switch (directions[i])
-                    {
-                        case 'u':
-                            b.Type = new Type(_Change.Speed);
-                            break;
 
-                        case 'd':
-                            b.Type = new Type(_Change.Slow);
-                            break;
-
-                        case 'r':
-                            b.Type = new Type(_Change.Reverse);
-                            break;
-
-                        case 'n':
-                            b.Type = new Type(_Change.Normal);
-                            break;
-                    }
-
-                    addBox(i / 2, x, y, b);
-                }
+                addBox(i, x, y, b);
             }
 
             foreach (var action in actions)
@@ -107,8 +83,13 @@ namespace TemplateGame.Game
                 int i = (int)action["floor"];
                 string eventType = (string)action["eventType"];
                 string speedType = (string)action["speedType"];
-                string bpm = (string)action["beatsPerMinute"];
-                string bpmMultiplier = (string)action["bpmMultiplier"];
+                float bpm = (float)action["beatsPerMinute"];
+                float bpmMultiplier = (float)action["bpmMultiplier"];
+
+                if (speedType == "Multiplier")
+                {
+                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier);
+                }
             }
         }
 
@@ -116,6 +97,7 @@ namespace TemplateGame.Game
         {
             b.X = x * GridSize;
             b.Y = y * GridSize;
+            //b.Type.Change = _Change.Normal;
             Box.Add(Objects[i] = b);
         }
 
