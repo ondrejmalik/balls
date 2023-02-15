@@ -73,21 +73,25 @@ namespace TemplateGame.Game
                         y++;
                         b.Direction = _Direction.Down;
                         break;
+
                     case 'Z':
                         x -= 0.70710678f;
                         y += 0.70710678f;
                         b.Direction = _Direction.Z;
                         break;
+
                     case 'Q':
                         x -= 0.70710678f;
                         y -= 0.70710678f;
                         b.Direction = _Direction.Q;
                         break;
+
                     case 'E':
                         x += 0.70710678f;
                         y -= 0.70710678f;
                         b.Direction = _Direction.E;
                         break;
+
                     case 'C':
                         x += 0.70710678f;
                         y += 0.70710678f;
@@ -102,14 +106,25 @@ namespace TemplateGame.Game
             {
                 int i = (int)action["floor"];
                 string eventType = (string)action["eventType"];
-                string speedType = (string)action["speedType"];
-                float bpm = (float)action["beatsPerMinute"];
-                float bpmMultiplier = (float)action["bpmMultiplier"];
+                string speedType = null;
+                float bpm = 0;
+                float bpmMultiplier = 0;
+
+                if ((string)action["speedType"] != null) { speedType = (string)action["speedType"]; }
+
+                if ((string)action["beatsPerMinute"] != null) bpm = (float)action["beatsPerMinute"];
+                if ((string)action["bpmMultiplier"] != null) bpmMultiplier = (float)action["bpmMultiplier"];
 
                 if (speedType == "Multiplier")
                 {
                     Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, bpm);
                     Objects[i].Hitbox.Colour = Colour4.Yellow;
+                }
+
+                if (eventType == "Twirl")
+                {
+                    Objects[i].Type = new Type(_Change.Twirl);
+                    Objects[i].Hitbox.Colour = Colour4.Green;
                 }
             }
         }

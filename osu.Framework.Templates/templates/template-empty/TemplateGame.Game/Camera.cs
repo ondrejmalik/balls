@@ -107,6 +107,15 @@ namespace TemplateGame.Game
                             if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
                             if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
                         }
+
+                        if (Map.Objects[i].Type.Change == _Change.Twirl)
+                        {
+                            if (player.Koul1.Twirl == 1) player.Koul1.Twirl = -1;
+                            else player.Koul1.Twirl = 1;
+
+                            if (player.Koul2.Twirl == 1) player.Koul2.Twirl = -1;
+                            else player.Koul2.Twirl = 1;
+                        }
                     }
 
                     player.Koul2.CanMove = true;
@@ -128,6 +137,15 @@ namespace TemplateGame.Game
                             if (Map.Objects[i].Type.Ratio != 0) player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
                             if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
                             if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                        }
+
+                        if (Map.Objects[i].Type.Change == _Change.Twirl)
+                        {
+                            if (player.Koul1.Twirl == 1) player.Koul1.Twirl = -1;
+                            else player.Koul1.Twirl = 1;
+
+                            if (player.Koul2.Twirl == 1) player.Koul2.Twirl = -1;
+                            else player.Koul2.Twirl = 1;
                         }
                     }
 

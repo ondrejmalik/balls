@@ -19,6 +19,7 @@ namespace TemplateGame.Game
         public Vector2 Center;
         public float Angle;
         public Sprite Sprite;
+        public int Twirl = 1;
 
         public Koule()
         {
@@ -64,7 +65,7 @@ namespace TemplateGame.Game
             if (CanMove)
             {
                 base.Update();
-                Angle += Multiplier * Speed * ((float)Time.Elapsed) * MathF.PI / 1000 / 60;
+                Angle += Twirl * Multiplier * Speed * ((float)Time.Elapsed) * MathF.PI / 1000 / 60;
                 var x = MathF.Cos(Angle) * radius;
                 var y = MathF.Sin(Angle) * radius;
                 Position = new Vector2(x, y);

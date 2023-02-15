@@ -9,9 +9,7 @@ S
 #osu.Framework/Input/InputManager.cs,3\2\32b2269daf01e2f227f3cefd1708ee890e1f1855
 Y
 )osu.Framework/Input/ButtonEventManager.cs,4\4\4455ec97df0640c3637dd80eb4ff1595a06ba266
-R
-"osu.Framework/Graphics/Drawable.cs,6\d\6dcdd2ef50b1bf3a4661a62365e363519a122907
-U
-%osu.Framework/Threading/GameThread.cs,2\1\21c5a02c4af0e207bc058ffa378470ba4be84a75
-
-Oosu.Framework.Templates/templates/template-empty/TemplateGame.Game/MapLoader.cs,7\e\7e9df016854e7d0f1f4e76b7ffcf15895bf6ab75
+|
+Losu.Framework.Templates/templates/template-empty/TemplateGame.Game/Player.cs,1\b\1bb780daaef02b2e99e30e426480db36a00308fd
+{
+Kosu.Framework.Templates/templates/template-empty/TemplateGame.Game/Block.cs,9\6\963e75cd3cb95e52521f96c06b5d811fb0ce6166
