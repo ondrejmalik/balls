@@ -68,7 +68,7 @@ namespace TemplateGame.Game
                 var x = MathF.Cos(Angle) * radius;
                 var y = MathF.Sin(Angle) * radius;
                 Position = new Vector2(x, y);
-                text.Text = Angle.ToString() + "     " + x.ToString() + "           " + y.ToString();
+                text.Text = Angle.ToString();
             }
         }
 

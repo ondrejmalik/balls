@@ -13,7 +13,7 @@ namespace TemplateGame.Game
         public Container Box;
         public Block[] Objects = new Block[100];
         public int GridSize = 150;
-        private string map = "rnrnrnrnrndudndndnldlnlnur";
+        private string map;
         private Block b;
         private MapLoader mapLoader = new MapLoader();
         private List<JToken> actions = new List<JToken>();
@@ -39,8 +39,8 @@ namespace TemplateGame.Game
             };
             map = mapLoader.LoadMap();
             actions = mapLoader.LoadActions();
-            int x = 4;
-            int y = 3;
+            float x = 4;
+            float y = 3;
             Box.Add(Objects[0] = new Block
             {
                 Position = new Vector2(x * GridSize, y * GridSize),
@@ -73,6 +73,26 @@ namespace TemplateGame.Game
                         y++;
                         b.Direction = _Direction.Down;
                         break;
+                    case 'Z':
+                        x -= 0.70710678f;
+                        y += 0.70710678f;
+                        b.Direction = _Direction.Z;
+                        break;
+                    case 'Q':
+                        x -= 0.70710678f;
+                        y -= 0.70710678f;
+                        b.Direction = _Direction.Q;
+                        break;
+                    case 'E':
+                        x += 0.70710678f;
+                        y -= 0.70710678f;
+                        b.Direction = _Direction.E;
+                        break;
+                    case 'C':
+                        x += 0.70710678f;
+                        y += 0.70710678f;
+                        b.Direction = _Direction.C;
+                        break;
                 }
 
                 addBox(i, x, y, b);
@@ -88,12 +108,13 @@ namespace TemplateGame.Game
 
                 if (speedType == "Multiplier")
                 {
-                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier);
+                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, bpm);
+                    Objects[i].Hitbox.Colour = Colour4.Yellow;
                 }
             }
         }
 
-        private void addBox(int i, int x, int y, Block b)
+        private void addBox(int i, float x, float y, Block b)
         {
             b.X = x * GridSize;
             b.Y = y * GridSize;

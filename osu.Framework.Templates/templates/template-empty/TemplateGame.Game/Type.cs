@@ -13,11 +13,11 @@ public enum _Change
 
 public class Type
 {
-    public _Change Change;
+    public _Change? Change;
     public float Ratio = 1;
     public float Bpm = 0;
 
-    public Type(_Change change, float ratio)
+    public Type(_Change change, float ratio, float bpm)
     {
         Change = change;
         Ratio = ratio;

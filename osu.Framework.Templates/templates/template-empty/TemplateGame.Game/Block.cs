@@ -14,7 +14,11 @@ namespace TemplateGame.Game
         Up,
         Down,
         Left,
-        Right
+        Right,
+        Z,
+        Q,
+        E,
+        C
     }
 
     public partial class Block : CompositeDrawable

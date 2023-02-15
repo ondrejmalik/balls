@@ -17,7 +17,7 @@ namespace TemplateGame.Game
             AutoSizeAxes = Axes.Both;
             Origin = Anchor.Centre;
             Anchor = Anchor.Centre;
-            Position = new Vector2(3 * 150, 3 * 150);
+            Position = new Vector2(4 * 150, 3 * 150);
         }
 
         [BackgroundDependencyLoader]

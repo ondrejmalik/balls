@@ -1,6 +1,7 @@
 ﻿using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Input.Events;
 using osuTK;
@@ -17,6 +18,7 @@ namespace TemplateGame.Game
         private int i;
         private int lastObjectIndex;
         private bool lastObject = false;
+        private SpriteText text;
 
         public Camera()
         {
@@ -46,6 +48,14 @@ namespace TemplateGame.Game
                         Anchor = Anchor.TopLeft,
                         Origin = Anchor.Centre,
                     },
+                    text = new SpriteText()
+                    {
+                        Anchor = Anchor.TopLeft,
+                        Origin = Anchor.TopLeft,
+                        Colour = Colour4.White,
+                        Font = new FontUsage(size: 30),
+                        Position = new Vector2(10, 10)
+                    }
                 }
             };
             lastObjectIndex = Map.LastObject();
@@ -64,12 +74,12 @@ namespace TemplateGame.Game
                 if (Map.Objects[i].CheckCollision(player.CollisionQuad))
                 {
                     collision = true;
-                    //text.Text = "Kolize";
+                    text.Text = "Kolize";
                 }
                 else
                 {
                     collision = false;
-                    //text.Text = "NeKolize :(";
+                    text.Text = "NeKolize :(";
                 }
             }
             else { lastObject = true; }
@@ -87,13 +97,18 @@ namespace TemplateGame.Game
                     player.Koul2.Change(player.Koul1.Angle);
                     player.Koul1.Position = new Vector2(0, 0);
                     player.Position = Center;
-                    if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+
+                    if (Map.Objects[i].Type != null)
                     {
-                        player.Koul2.Speed = Map.Objects[i].Type.Bpm;
-                        player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
-                        player.Koul1.Speed = Map.Objects[i].Type.Bpm;
-                        player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                        if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+                        {
+                            if (Map.Objects[i].Type.Bpm != 0) player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                            if (Map.Objects[i].Type.Ratio != 0) player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                            if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                            if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                        }
                     }
+
                     player.Koul2.CanMove = true;
                     already_Switched = true;
                 }
@@ -105,12 +120,15 @@ namespace TemplateGame.Game
                     player.Koul2.Position = new Vector2(0, 0);
                     player.Position = Center;
 
-                    if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+                    if (Map.Objects[i].Type != null)
                     {
-                        player.Koul1.Speed = Map.Objects[i].Type.Bpm;
-                        player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
-                        player.Koul2.Speed = Map.Objects[i].Type.Bpm;
-                        player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                        if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
+                        {
+                            if (Map.Objects[i].Type.Bpm != 0) player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                            if (Map.Objects[i].Type.Ratio != 0) player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                            if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                            if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                        }
                     }
 
                     player.Koul1.CanMove = true;
@@ -119,6 +137,8 @@ namespace TemplateGame.Game
 
                 if (already_Switched)
                 {
+                    float angle45 = 0.70710678f;
+
                     switch (Map.Objects[i].Direction)
                     {
                         case _Direction.Up:
@@ -135,6 +155,22 @@ namespace TemplateGame.Game
 
                         case _Direction.Right:
                             this.MoveTo(new Vector2(this.Position.X - Map.GridSize, this.Position.Y), Map.GridSize);
+                            break;
+
+                        case _Direction.Q:
+                            this.MoveTo(new Vector2(this.Position.X + Map.GridSize * angle45, this.Position.Y + Map.GridSize * angle45), Map.GridSize);
+                            break;
+
+                        case _Direction.E:
+                            this.MoveTo(new Vector2(this.Position.X - Map.GridSize * angle45, this.Position.Y + Map.GridSize * angle45), Map.GridSize);
+                            break;
+
+                        case _Direction.Z:
+                            this.MoveTo(new Vector2(this.Position.X + Map.GridSize * angle45, this.Position.Y - Map.GridSize * angle45), Map.GridSize);
+                            break;
+
+                        case _Direction.C:
+                            this.MoveTo(new Vector2(this.Position.X - Map.GridSize * angle45, this.Position.Y - Map.GridSize * angle45), Map.GridSize);
                             break;
                     }
 

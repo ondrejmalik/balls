@@ -1,4 +1,0 @@
-
-acsharpsquid:S1121,"8Extract the assignment of 'Hitbox' from this expression.(Úÿ«Àÿÿÿÿÿ8ÇÑ×¤á0
-ƒcsharpsquid:S2342"_Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.(È±™Æ8ÈÑ×¤á0
-jcsharpsquid:S11855"ARemove this method 'LoadComplete' to simply inherit its behavior.(ŽßÔÍøÿÿÿÿ8ÈÑ×¤á0
