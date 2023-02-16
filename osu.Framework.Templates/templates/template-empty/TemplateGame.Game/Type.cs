@@ -9,6 +9,7 @@ public enum _Change
     Speed,
     Slow,
     Twirl,
+    NoClick,
 }
 
 public class Type
@@ -21,6 +22,7 @@ public class Type
     {
         Change = change;
         Ratio = ratio;
+        Bpm = bpm;
     }
 
     public Type(_Change change)

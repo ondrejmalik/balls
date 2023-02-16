@@ -41,6 +41,7 @@ namespace TemplateGame.Game
             actions = mapLoader.LoadActions();
             float x = 4;
             float y = 3;
+            int noClickCount = 0;
             Box.Add(Objects[0] = new Block
             {
                 Position = new Vector2(x * GridSize, y * GridSize),
@@ -51,9 +52,17 @@ namespace TemplateGame.Game
             for (int i = 0; i < map.Length; i++)
             {
                 b = new Block();
+                bool noClickBool = false;
 
                 switch (directions[i])
                 {
+                    case '!':
+                        Objects[i - noClickCount - 1].Type = new Type(_Change.NoClick);
+                        Objects[i - noClickCount - 1].Hitbox.Colour = Colour4.Red;
+                        noClickCount++;
+                        noClickBool = true;
+                        break;
+
                     case 'R':
                         x++;
                         b.Direction = _Direction.Right;
@@ -99,7 +108,7 @@ namespace TemplateGame.Game
                         break;
                 }
 
-                addBox(i, x, y, b);
+                if (noClickBool == false) { addBox(i - noClickCount, x, y, b); }
             }
 
             foreach (var action in actions)
@@ -117,7 +126,12 @@ namespace TemplateGame.Game
 
                 if (speedType == "Multiplier")
                 {
-                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, bpm);
+                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, 0);
+                    Objects[i].Hitbox.Colour = Colour4.Yellow;
+                }
+                if (speedType == "Bpm")
+                {
+                    Objects[i].Type = new Type(_Change.Slow, 0, bpm);
                     Objects[i].Hitbox.Colour = Colour4.Yellow;
                 }
 
@@ -135,11 +149,6 @@ namespace TemplateGame.Game
             b.Y = y * GridSize;
             //b.Type.Change = _Change.Normal;
             Box.Add(Objects[i] = b);
-        }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
         }
 
         protected override void Update()

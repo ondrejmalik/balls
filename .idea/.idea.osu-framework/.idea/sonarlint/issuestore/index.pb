@@ -13,3 +13,9 @@ Y
 Losu.Framework.Templates/templates/template-empty/TemplateGame.Game/Player.cs,1\b\1bb780daaef02b2e99e30e426480db36a00308fd
 {
 Kosu.Framework.Templates/templates/template-empty/TemplateGame.Game/Block.cs,9\6\963e75cd3cb95e52521f96c06b5d811fb0ce6166
+f
+6osu.Framework/Graphics/Containers/CompositeDrawable.cs,b\4\b4e89d0965cce97c1fd2afa0ca38c07cd4c1b54f
+R
+"osu.Framework/Graphics/Drawable.cs,6\d\6dcdd2ef50b1bf3a4661a62365e363519a122907
+_
+/osu.Framework/Allocation/DependencyActivator.cs,a\f\afdaa64c7d269be031bda8584b44a78e6d379ed1

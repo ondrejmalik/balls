@@ -102,10 +102,19 @@ namespace TemplateGame.Game
                     {
                         if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
                         {
-                            if (Map.Objects[i].Type.Bpm != 0) player.Koul2.Speed = Map.Objects[i].Type.Bpm;
-                            if (Map.Objects[i].Type.Ratio != 0) player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
-                            if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
-                            if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                            if (Map.Objects[i].Type.Bpm != 0)
+                            {
+                                player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                                player.Koul2.Multiplier = 1;
+                                player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                                player.Koul1.Multiplier = 1;
+                            }
+
+                            if (Map.Objects[i].Type.Ratio != 0)
+                            {
+                                player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                                player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                            }
                         }
 
                         if (Map.Objects[i].Type.Change == _Change.Twirl)
@@ -133,10 +142,19 @@ namespace TemplateGame.Game
                     {
                         if (Map.Objects[i].Type.Change == _Change.Slow || Map.Objects[i].Type.Change == _Change.Speed)
                         {
-                            if (Map.Objects[i].Type.Bpm != 0) player.Koul2.Speed = Map.Objects[i].Type.Bpm;
-                            if (Map.Objects[i].Type.Ratio != 0) player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
-                            if (Map.Objects[i].Type.Bpm != 0) player.Koul1.Speed = Map.Objects[i].Type.Bpm;
-                            if (Map.Objects[i].Type.Ratio != 0) player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                            if (Map.Objects[i].Type.Bpm != 0)
+                            {
+                                player.Koul2.Speed = Map.Objects[i].Type.Bpm;
+                                player.Koul2.Multiplier = 1;
+                                player.Koul1.Speed = Map.Objects[i].Type.Bpm;
+                                player.Koul1.Multiplier = 1;
+                            }
+
+                            if (Map.Objects[i].Type.Ratio != 0)
+                            {
+                                player.Koul2.Multiplier = Map.Objects[i].Type.Ratio;
+                                player.Koul1.Multiplier = Map.Objects[i].Type.Ratio;
+                            }
                         }
 
                         if (Map.Objects[i].Type.Change == _Change.Twirl)
