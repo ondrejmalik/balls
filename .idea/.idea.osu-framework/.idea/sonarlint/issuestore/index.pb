@@ -19,3 +19,7 @@ R
 "osu.Framework/Graphics/Drawable.cs,6\d\6dcdd2ef50b1bf3a4661a62365e363519a122907
 _
 /osu.Framework/Allocation/DependencyActivator.cs,a\f\afdaa64c7d269be031bda8584b44a78e6d379ed1
+U
+%osu.Framework/Threading/GameThread.cs,2\1\21c5a02c4af0e207bc058ffa378470ba4be84a75
+z
+Josu.Framework.Templates/templates/template-empty/TemplateGame.Game/Type.cs,5\c\5ca8323f878fd6836bed71174c97811b2e50eced
