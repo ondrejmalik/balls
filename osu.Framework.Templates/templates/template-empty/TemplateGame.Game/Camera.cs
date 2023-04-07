@@ -88,15 +88,19 @@ namespace TemplateGame.Game
         protected override bool OnKeyDown(KeyDownEvent e)
         {
             bool already_Switched = false;
+            bool doSwitch = true;
 
             if (e.Key == osuTK.Input.Key.N && lastObject == false)
             {
                 if (player.Koul1.CanMove && collision)
                 {
-                    player.Koul1.CanMove = false;
-                    player.Koul2.Change(player.Koul1.Angle);
-                    player.Koul1.Position = new Vector2(0, 0);
-                    player.Position = Center;
+                    if (Map.Objects[i].Type == null)
+                    {
+                        Change(true);
+                    }
+                    else
+                    {
+                    }
 
                     if (Map.Objects[i].Type != null)
                     {
@@ -125,18 +129,32 @@ namespace TemplateGame.Game
                             if (player.Koul2.Twirl == 1) player.Koul2.Twirl = -1;
                             else player.Koul2.Twirl = 1;
                         }
+
+                        if (Map.Objects[i].Type.Change == _Change.NoClick)
+                        {
+                            doSwitch = false;
+                        }
+                        else Change(true);
                     }
 
-                    player.Koul2.CanMove = true;
-                    already_Switched = true;
+                    if (doSwitch)
+                    {
+                        player.Koul2.CanMove = true;
+                        already_Switched = true;
+                    }
+
+                    if (lastObject == false) { i++; }
                 }
 
                 if (player.Koul2.CanMove && already_Switched == false && collision)
                 {
-                    player.Koul2.CanMove = false;
-                    player.Koul1.Change(player.Koul2.Angle);
-                    player.Koul2.Position = new Vector2(0, 0);
-                    player.Position = Center;
+                    if (Map.Objects[i].Type == null)
+                    {
+                        Change(false);
+                    }
+                    else
+                    {
+                    }
 
                     if (Map.Objects[i].Type != null)
                     {
@@ -165,10 +183,20 @@ namespace TemplateGame.Game
                             if (player.Koul2.Twirl == 1) player.Koul2.Twirl = -1;
                             else player.Koul2.Twirl = 1;
                         }
+
+                        if (Map.Objects[i].Type.Change == _Change.NoClick)
+                        {
+                            doSwitch = false;
+                        }
+                        else Change(false);
                     }
 
-                    player.Koul1.CanMove = true;
-                    already_Switched = true;
+                    if (doSwitch)
+                    {
+                        player.Koul1.CanMove = true;
+                        already_Switched = true;
+                    }
+                    if (lastObject == false) { i++; }
                 }
 
                 if (already_Switched)
@@ -209,12 +237,28 @@ namespace TemplateGame.Game
                             this.MoveTo(new Vector2(this.Position.X - Map.GridSize * angle45, this.Position.Y - Map.GridSize * angle45), Map.GridSize);
                             break;
                     }
-
-                    if (lastObject == false) { i++; }
                 }
             }
 
             return base.OnKeyDown(e);
+        }
+
+        private void Change(bool isKoul1)
+        {
+            if (isKoul1)
+            {
+                player.Koul1.CanMove = false;
+                player.Koul2.Change(player.Koul1.Angle);
+                player.Koul1.Position = new Vector2(0, 0);
+                player.Position = Center;
+            }
+            else
+            {
+                player.Koul2.CanMove = false;
+                player.Koul1.Change(player.Koul2.Angle);
+                player.Koul2.Position = new Vector2(0, 0);
+                player.Position = Center;
+            }
         }
 
         public Vector2 Center => new(Map.Objects[i].Position.X + CameraPos.X, Map.Objects[i].Position.Y + CameraPos.Y);

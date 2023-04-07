@@ -17,7 +17,6 @@ namespace TemplateGame.Game
         private Block b;
         private MapLoader mapLoader = new MapLoader();
         private List<JToken> actions = new List<JToken>();
-
         public Mapa()
         {
             Anchor = Anchor.Centre;
@@ -42,7 +41,7 @@ namespace TemplateGame.Game
             float x = 4;
             float y = 3;
             int noClickCount = 0;
-            Box.Add(Objects[0] = new Block
+            Box.Add(Objects[0] = new Block// prvni blok
             {
                 Position = new Vector2(x * GridSize, y * GridSize),
                 Direction = _Direction.Left,
@@ -60,6 +59,8 @@ namespace TemplateGame.Game
                         Objects[i - noClickCount - 1].Type = new Type(_Change.NoClick);
                         Objects[i - noClickCount - 1].Hitbox.Colour = Colour4.Red;
                         noClickCount++;
+                        x = Objects[i - noClickCount - 1].Position.X / GridSize;
+                        y = Objects[i - noClickCount - 1].Position.Y / GridSize;
                         noClickBool = true;
                         break;
 
