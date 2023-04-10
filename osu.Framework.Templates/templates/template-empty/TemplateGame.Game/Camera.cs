@@ -1,4 +1,5 @@
-﻿using osu.Framework.Allocation;
+﻿using System;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
@@ -19,6 +20,7 @@ namespace TemplateGame.Game
         private int lastObjectIndex;
         private bool lastObject = false;
         private SpriteText text;
+        private double deathangle = 0;
 
         public Camera()
         {
@@ -81,6 +83,10 @@ namespace TemplateGame.Game
                     collision = false;
                     text.Text = "NeKolize :(";
                 }
+
+                if (player.Koul1.CanMove && player.Koul1.Angle >= deathangle) { MainScreen.text.Text = "Death1" + deathangle + "  " + player.Koul1.Angle; }
+
+                if (player.Koul2.CanMove && player.Koul2.Angle >= deathangle) { MainScreen.text.Text = "Death2" + deathangle + "  " + player.Koul1.Angle; }
             }
             else { lastObject = true; }
         }
@@ -96,6 +102,7 @@ namespace TemplateGame.Game
                 {
                     if (Map.Objects[i].Type == null)
                     {
+                        deathangle = player.Koul1.Angle + MathF.PI * 1.5;
                         Change(true);
                     }
                     else
@@ -150,6 +157,7 @@ namespace TemplateGame.Game
                 {
                     if (Map.Objects[i].Type == null)
                     {
+                        deathangle = player.Koul1.Angle + MathF.PI * 1.5;
                         Change(false);
                     }
                     else
@@ -196,6 +204,7 @@ namespace TemplateGame.Game
                         player.Koul1.CanMove = true;
                         already_Switched = true;
                     }
+
                     if (lastObject == false) { i++; }
                 }
 
@@ -203,7 +212,7 @@ namespace TemplateGame.Game
                 {
                     float angle45 = 0.70710678f;
 
-                    switch (Map.Objects[i].Direction)
+                    switch (Map.Objects[i - 1].Direction)
                     {
                         case _Direction.Up:
                             this.MoveTo(new Vector2(this.Position.X, this.Position.Y + Map.GridSize), Map.GridSize);

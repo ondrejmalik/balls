@@ -11,12 +11,13 @@ namespace TemplateGame.Game
     public partial class Mapa : CompositeDrawable
     {
         public Container Box;
-        public Block[] Objects = new Block[100];
+        public Block[] Objects = new Block[10000];
         public int GridSize = 150;
         private string map;
         private Block b;
         private MapLoader mapLoader = new MapLoader();
         private List<JToken> actions = new List<JToken>();
+
         public Mapa()
         {
             Anchor = Anchor.Centre;
@@ -41,7 +42,7 @@ namespace TemplateGame.Game
             float x = 4;
             float y = 3;
             int noClickCount = 0;
-            Box.Add(Objects[0] = new Block// prvni blok
+            Box.Add(Objects[0] = new Block // prvni blok
             {
                 Position = new Vector2(x * GridSize, y * GridSize),
                 Direction = _Direction.Left,
@@ -130,6 +131,7 @@ namespace TemplateGame.Game
                     Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, 0);
                     Objects[i].Hitbox.Colour = Colour4.Yellow;
                 }
+
                 if (speedType == "Bpm")
                 {
                     Objects[i].Type = new Type(_Change.Slow, 0, bpm);
@@ -142,6 +144,8 @@ namespace TemplateGame.Game
                     Objects[i].Hitbox.Colour = Colour4.Green;
                 }
             }
+
+            textureSet();
         }
 
         private void addBox(int i, float x, float y, Block b)
@@ -152,8 +156,102 @@ namespace TemplateGame.Game
             Box.Add(Objects[i] = b);
         }
 
-        protected override void Update()
+        private void textureSet()
         {
+            for (int i = 0; i < LastObject() - 1; i++)
+            {
+                if (Objects[i].Direction == _Direction.Right)
+                {
+                    if (Objects[i + 1].Direction == _Direction.Up)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LU");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Down)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Left)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LR");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Right)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LR");
+                    }
+                }
+
+                if (Objects[i].Direction == _Direction.Down)
+                {
+                    if (Objects[i + 1].Direction == _Direction.Up)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("UD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Down)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("UD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Left)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LU");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Right)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("RU");
+                    }
+                }
+
+                if (Objects[i].Direction == _Direction.Left)
+                {
+                    if (Objects[i + 1].Direction == _Direction.Up)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LU");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Down)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("RD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Left)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LR");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Right)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LR");
+                    }
+                }
+
+                if (Objects[i].Direction == _Direction.Up)
+                {
+                    if (Objects[i + 1].Direction == _Direction.Up)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("UD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Down)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("UD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Left)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("LD");
+                    }
+
+                    if (Objects[i + 1].Direction == _Direction.Right)
+                    {
+                        Objects[i].Sprite.Texture = Objects[i].Textures.Get("RU");
+                    }
+                }
+            }
         }
 
         public int LastObject()

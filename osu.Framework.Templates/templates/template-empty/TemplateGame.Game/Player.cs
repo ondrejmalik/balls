@@ -11,7 +11,6 @@ namespace TemplateGame.Game
     {
         public Koule Koul1;
         public Koule Koul2;
-
         public Player()
         {
             AutoSizeAxes = Axes.Both;

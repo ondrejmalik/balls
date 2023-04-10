@@ -17,7 +17,7 @@ namespace TemplateGame.Game
         private Camera camera;
         private Video bg;
         private Track track;
-        private SpriteText text;
+        public static SpriteText text;
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures, ITrackStore tracks)
@@ -49,7 +49,7 @@ namespace TemplateGame.Game
                 }
             };
             track = tracks.Get("Audio.mp3");
-            track.Volume.Value = 0;
+            track.Volume.Value = 0.00f;
             track.Start();
             bg.IsPlaying = false;
         }

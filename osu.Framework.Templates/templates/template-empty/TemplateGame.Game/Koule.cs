@@ -42,6 +42,7 @@ namespace TemplateGame.Game
                     {
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
+                        Size = new Vector2(50, 50),
                     },
                     text = new SpriteText
                     {

@@ -3,6 +3,7 @@ using osu.Framework.Extensions.PolygonExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Primitives;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osuTK;
 using Box = osu.Framework.Graphics.Shapes.Box;
@@ -25,8 +26,10 @@ namespace TemplateGame.Game
     {
         private Container box;
         public Box Hitbox;
-        public _Direction Direction;
+        private _Direction direction;
         public Type Type;
+        public Sprite Sprite;
+        public TextureStore Textures;
 
         public Block()
         {
@@ -38,6 +41,7 @@ namespace TemplateGame.Game
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
+            this.Textures = textures;
             InternalChild = box = new Container
             {
                 AutoSizeAxes = Axes.Both,
@@ -47,16 +51,37 @@ namespace TemplateGame.Game
                 {
                     Hitbox = new Box
                     {
-                        Size = new Vector2(100, 100),
+                        Size = new Vector2(50, 50),
                         Colour = Colour4.Cyan,
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                    },
+                    Sprite = new Sprite()
+                    {
+                        Size = new Vector2(150, 150),
+                        Anchor = Anchor.TopLeft,
+                        Origin = Anchor.TopLeft,
+
                     }
                 }
             };
         }
 
-        protected override void LoadComplete()
+        public _Direction Direction
         {
-            base.LoadComplete();
+            get
+            {
+                return direction;
+            }
+            set
+            {
+                direction = value;
+            }
+        }
+
+        public void TextureSet(string textureName)
+        {
+            Sprite.Texture = Textures.Get(textureName);
         }
 
         public bool CheckCollision(Quad playerQuad)

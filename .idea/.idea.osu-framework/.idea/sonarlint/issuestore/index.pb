@@ -9,3 +9,13 @@ Y
 )osu.Framework/Input/ButtonEventManager.cs,4\4\4455ec97df0640c3637dd80eb4ff1595a06ba266
 f
 6osu.Framework/Graphics/Containers/CompositeDrawable.cs,b\4\b4e89d0965cce97c1fd2afa0ca38c07cd4c1b54f
+z
+Josu.Framework.Templates/templates/template-empty/TemplateGame.Game/Type.cs,5\c\5ca8323f878fd6836bed71174c97811b2e50eced
+R
+"osu.Framework/Graphics/Drawable.cs,6\d\6dcdd2ef50b1bf3a4661a62365e363519a122907
+_
+/osu.Framework/Allocation/DependencyContainer.cs,c\0\c0f642f684dfbf3be842f6838e937a43eefd15d7
+_
+/osu.Framework/Allocation/DependencyActivator.cs,a\f\afdaa64c7d269be031bda8584b44a78e6d379ed1
+S
+#osu.Framework/Input/InputManager.cs,3\2\32b2269daf01e2f227f3cefd1708ee890e1f1855
