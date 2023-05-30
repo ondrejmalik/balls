@@ -20,7 +20,7 @@ namespace TemplateGame.Game
         {
             base.LoadComplete();
 
-            screenStack.Push(new MainScreen());
+            screenStack.Push(new Menu(false));
         }
     }
 }

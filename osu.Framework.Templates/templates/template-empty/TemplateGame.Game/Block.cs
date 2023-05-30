@@ -24,15 +24,17 @@ namespace TemplateGame.Game
 
     public partial class Block : CompositeDrawable
     {
-        private Container box;
+        public Container Box;
         public Box Hitbox;
         private _Direction direction;
         public Type Type;
         public Sprite Sprite;
         public TextureStore Textures;
+        private int hitboxSize;
 
         public Block()
         {
+            hitboxSize = 1;
             AutoSizeAxes = Axes.Both;
             Origin = Anchor.Centre;
             Anchor = Anchor.TopLeft;
@@ -42,7 +44,7 @@ namespace TemplateGame.Game
         private void load(TextureStore textures)
         {
             this.Textures = textures;
-            InternalChild = box = new Container
+            InternalChild = Box = new Container
             {
                 AutoSizeAxes = Axes.Both,
                 Anchor = Anchor.Centre,
@@ -51,7 +53,7 @@ namespace TemplateGame.Game
                 {
                     Hitbox = new Box
                     {
-                        Size = new Vector2(50, 50),
+                        Size = new Vector2(hitboxSize, hitboxSize),
                         Colour = Colour4.Cyan,
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
@@ -61,7 +63,6 @@ namespace TemplateGame.Game
                         Size = new Vector2(150, 150),
                         Anchor = Anchor.TopLeft,
                         Origin = Anchor.TopLeft,
-
                     }
                 }
             };
@@ -79,9 +80,9 @@ namespace TemplateGame.Game
             }
         }
 
-        public void TextureSet(string textureName)
+        public void TextureSet(Sprite sprite, string textureName)
         {
-            Sprite.Texture = Textures.Get(textureName);
+            sprite.Texture = Textures.Get(textureName);
         }
 
         public bool CheckCollision(Quad playerQuad)

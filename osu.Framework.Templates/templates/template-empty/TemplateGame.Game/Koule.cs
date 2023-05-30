@@ -2,9 +2,11 @@ using System;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osuTK;
+using UdpTest.Game;
 
 namespace TemplateGame.Game
 {
@@ -20,9 +22,20 @@ namespace TemplateGame.Game
         public float Angle;
         public Sprite Sprite;
         public int Twirl = 1;
+        public Circle hitbox;
+        private int hitboxSize;
 
         public Koule()
         {
+            if (GameSettings.HardMode)
+            {
+                hitboxSize = 30;
+            }
+            else
+            {
+                hitboxSize = 70;
+            }
+
             AutoSizeAxes = Axes.Both;
             Origin = Anchor.Centre;
             Anchor = Anchor.Centre;
@@ -38,6 +51,12 @@ namespace TemplateGame.Game
                 Origin = Anchor.Centre,
                 Children = new Drawable[]
                 {
+                    hitbox = new Circle()
+                    {
+                        Size = new Vector2(hitboxSize, hitboxSize),
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                    },
                     Sprite = new Sprite
                     {
                         Anchor = Anchor.Centre,
@@ -56,11 +75,6 @@ namespace TemplateGame.Game
             };
         }
 
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
-        }
-
         protected override void Update()
         {
             if (CanMove)
@@ -70,7 +84,7 @@ namespace TemplateGame.Game
                 var x = MathF.Cos(Angle) * radius;
                 var y = MathF.Sin(Angle) * radius;
                 Position = new Vector2(x, y);
-                text.Text = Angle.ToString();
+                //text.Text = Angle.ToString();
             }
         }
 

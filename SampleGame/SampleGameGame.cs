@@ -1,35 +1,27 @@
-﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
-// See the LICENCE file in the repository root for full licence text.
-
-using osu.Framework;
-using osu.Framework.Graphics;
-using osuTK;
-using osuTK.Graphics;
-using osu.Framework.Graphics.Shapes;
+﻿using insaneFps.Game;
 using osu.Framework.Allocation;
+using osu.Framework.Graphics;
+using osu.Framework.Screens;
 
-namespace SampleGame
+namespace TemplateGame.Game
 {
-    public partial class SampleGameGame : Game
+    public partial class SampleGameGame : TemplateGameGameBase
     {
-        private Box box = null!;
+        private ScreenStack screenStack;
 
         [BackgroundDependencyLoader]
         private void load()
         {
-            Add(box = new Box
-            {
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Size = new Vector2(150, 150),
-                Colour = Color4.Tomato
-            });
+            // Add your top-level game components here.
+            // A screen stack and sample screen has been provided for convenience, but you can replace it if you don't want to use screens.
+            Child = screenStack = new ScreenStack { RelativeSizeAxes = Axes.Both };
         }
 
-        protected override void Update()
+        protected override void LoadComplete()
         {
-            base.Update();
-            box.Rotation += (float)Time.Elapsed / 10;
+            base.LoadComplete();
+
+            screenStack.Push(new MainScreen());
         }
     }
 }

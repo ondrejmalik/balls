@@ -4,7 +4,7 @@
 using Android.App;
 using osu.Framework;
 using osu.Framework.Android;
-
+using TemplateGame.Game;
 namespace SampleGame.Android
 {
     [Activity(ConfigurationChanges = DEFAULT_CONFIG_CHANGES, Exported = true, LaunchMode = DEFAULT_LAUNCH_MODE, MainLauncher = true)]

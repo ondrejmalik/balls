@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 using osuTK;
 
@@ -15,6 +16,9 @@ namespace TemplateGame.Game
         public int GridSize = 150;
         private string map;
         private Block b;
+        float x = 4;
+        float y = 3;
+        public Vector2 StartingPos;
         private MapLoader mapLoader = new MapLoader();
         private List<JToken> actions = new List<JToken>();
 
@@ -39,12 +43,10 @@ namespace TemplateGame.Game
             };
             map = mapLoader.LoadMap();
             actions = mapLoader.LoadActions();
-            float x = 4;
-            float y = 3;
             int noClickCount = 0;
             Box.Add(Objects[0] = new Block // prvni blok
             {
-                Position = new Vector2(x * GridSize, y * GridSize),
+                Position = StartingPos,
                 Direction = _Direction.Left,
             });
             char[] directions = map.ToCharArray();
@@ -128,23 +130,68 @@ namespace TemplateGame.Game
 
                 if (speedType == "Multiplier")
                 {
-                    Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, 0);
-                    Objects[i].Hitbox.Colour = Colour4.Yellow;
+                    if (bpmMultiplier > 1)
+                    {
+                        Objects[i].Type = new Type(_Change.Speed, bpmMultiplier, 0);
+                        Objects[i].Hitbox.Colour = Colour4.Yellow;
+                        Sprite s;
+                        Objects[i].Box.Add(s = new Sprite()
+                        {
+                            Anchor = Anchor.Centre,
+                            Origin = Anchor.Centre,
+                            Size = new Vector2(50, 50),
+                            //Colour = Colour4.Green,
+                        });
+                        Objects[i].TextureSet(s, "Speed.png");
+                    }
+                    else
+                    {
+                        Objects[i].Type = new Type(_Change.Slow, bpmMultiplier, 0);
+                        Objects[i].Hitbox.Colour = Colour4.Yellow;
+                        Sprite s;
+                        Objects[i].Box.Add(s = new Sprite()
+                        {
+                            Anchor = Anchor.Centre,
+                            Origin = Anchor.Centre,
+                            Size = new Vector2(50, 50),
+                            //Colour = Colour4.Green,
+                        });
+                        Objects[i].TextureSet(s, "Slow.png");
+                    }
                 }
 
                 if (speedType == "Bpm")
                 {
                     Objects[i].Type = new Type(_Change.Slow, 0, bpm);
                     Objects[i].Hitbox.Colour = Colour4.Yellow;
+                    Sprite s;
+                    Objects[i].Box.Add(s = new Sprite()
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Size = new Vector2(50, 50),
+                        //Colour = Colour4.Green,
+                    });
+                    Objects[i].TextureSet(s, "Slow.png");
                 }
 
                 if (eventType == "Twirl")
                 {
                     Objects[i].Type = new Type(_Change.Twirl);
                     Objects[i].Hitbox.Colour = Colour4.Green;
+                    Sprite s;
+                    Objects[i].Box.Add(s = new Sprite()
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Size = new Vector2(50, 50),
+                        //Colour = Colour4.Green,
+                    });
+                    Objects[i].TextureSet(s, "Twirl.png");
                 }
             }
 
+            StartingPos = new Vector2(x * GridSize, y * GridSize);
             textureSet();
         }
 
